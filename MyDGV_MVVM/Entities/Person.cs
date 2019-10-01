@@ -13,9 +13,9 @@ namespace MyDGV_MVVM.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        public DateTime Birthday { get; set; }
+        public DateTime Birthdate { get; set; }
         public string Email { get; set; }
         public string Photo { get; set; }
-        public bool Gender { get; set; }
+        public string Gender { get; set; }
     }
 }
