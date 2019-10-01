@@ -9,7 +9,7 @@ namespace MyDGV_MVVM.Entities
 {
     public class EFContext : DbContext
     {
-        public EFContext() : base("") { }
+        public EFContext() : base("connectDB") { }
         public DbSet<Person> People { get; set; }
     }
 }
