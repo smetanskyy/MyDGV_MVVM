@@ -6,10 +6,31 @@
         xmlns:local="clr-namespace:MyDGV_MVVM"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Grid Margin="0,0,0,0">
         <Label Content="Enter amount of users for adding to database" HorizontalAlignment="Left" Margin="360,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.414,-3.746"/>
         <TextBox x:Name="tbAmountUsers" HorizontalAlignment="Left" Height="25" Margin="622,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="53"/>
         <Button x:Name="btnEnterAmount" Content="Enter" HorizontalAlignment="Left" Margin="685,10,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="BtnEnterAmount_Click"/>
+
+        <DockPanel Margin="10,45,10,10">
+            <StackPanel DockPanel.Dock="Right" Margin="10,0,0,0">
+                <Button Name="btnAdd" Margin="10,20,10,5" Width="110">ADD USER</Button>
+                <Button Name="btnChange" Margin="10, 5, 10, 5" Width="110">CHANGE USER</Button>
+                <Button Name="btnRemove" Margin="10, 5, 10, 5" Width="110">REMOVE USER</Button>
+            </StackPanel>
+            <DataGrid Name="dgShow" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="clnName" Header="Name" Binding="{Binding Name}" Width="100" />
+                    <DataGridTextColumn x:Name="clnSurname" Header="Surname" Binding="{Binding Surname}" Width="100" />
+                </DataGrid.Columns>
+                <DataGrid.RowDetailsTemplate>
+                    <DataTemplate>
+                        <DockPanel Background="GhostWhite">
+                            <Image DockPanel.Dock="Left" Source="{Binding ImageUrl}" Height="64" Margin="10" />
+                        </DockPanel>
+                    </DataTemplate>
+                </DataGrid.RowDetailsTemplate>
+            </DataGrid>
+        </DockPanel>
 
     </Grid>
 </Window>
