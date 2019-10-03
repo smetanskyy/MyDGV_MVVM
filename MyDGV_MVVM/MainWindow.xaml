@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:MyDGV_MVVM"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
+
     <Grid Margin="0,0,0,0">
         <Label Content="Enter amount of users for adding to database" HorizontalAlignment="Left" Margin="360,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.414,-3.746"/>
         <TextBox x:Name="tbAmountUsers" HorizontalAlignment="Left" Height="25" Margin="622,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="53"/>
@@ -19,13 +20,23 @@
             </StackPanel>
             <DataGrid Name="dgShow" AutoGenerateColumns="False">
                 <DataGrid.Columns>
-                    <DataGridTextColumn x:Name="clnName" Header="Name" Binding="{Binding Name}" Width="100" />
-                    <DataGridTextColumn x:Name="clnSurname" Header="Surname" Binding="{Binding Surname}" Width="100" />
+                    <DataGridTextColumn x:Name="clnName" Header="Name" Binding="{Binding Name}" Width="150" />
+                    <DataGridTextColumn x:Name="clnSurname" Header="Surname" Binding="{Binding Surname}" Width="150" />
+                    <DataGridTextColumn x:Name="clnEmail" Header="Email" Binding="{Binding Email}" Width="*"/>
                 </DataGrid.Columns>
                 <DataGrid.RowDetailsTemplate>
                     <DataTemplate>
-                        <DockPanel Background="GhostWhite">
-                            <Image DockPanel.Dock="Left" Source="{Binding ImageUrl}" Height="64" Margin="10" />
+                        <DockPanel LastChildFill="True" Background="GhostWhite">
+                            <Image DockPanel.Dock="Left" Source="{Binding ImageUrl}" Height="64" Margin="20,10,20,10"/>
+                            <StackPanel x:Name="stackBirthdate" DockPanel.Dock="Right" Margin="5,5,100,5">
+                                <Label Content="Birthdate:" Margin="5"></Label>
+                                <DatePicker SelectedDate="{Binding Birthdate}" BorderThickness="0" Width="120"/>
+                            </StackPanel>
+                            <StackPanel x:Name="stackGender" Margin="20,5,20,5">
+                                <Label Content="Gender:" Margin="5"/>
+                                <RadioButton Content="male" IsChecked="True"/>
+                                <RadioButton Content="female" IsChecked="{Binding Gender}"/>
+                            </StackPanel>
                         </DockPanel>
                     </DataTemplate>
                 </DataGrid.RowDetailsTemplate>

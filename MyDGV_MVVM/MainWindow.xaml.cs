@@ -3,6 +3,7 @@ using MyDGV_MVVM.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,14 +43,14 @@ namespace MyDGV_MVVM
                 Surname = p.Surname,
                 Email = p.Email,
                 ImageUrl = p.Photo,
-                Gender = p.Gender,
+                Gender = p.Gender == "Female" ? true : false,
                 Birthdate = p.Birthdate
             });
 
             _people = new ObservableCollection<PersonVM>(model);
             dgShow.ItemsSource = _people;
         }
-
+        
         private void BtnEnterAmount_Click(object sender, RoutedEventArgs e)
         {
             if (tbAmountUsers.Text.Length == 0)
@@ -99,7 +100,7 @@ namespace MyDGV_MVVM
                 Surname = person.Surname,
                 Email = person.Email,
                 ImageUrl = person.Photo,
-                Gender = person.Gender,
+                Gender = person.Gender == "Female" ? true : false,
                 Birthdate = person.Birthdate
             });
         }
@@ -111,7 +112,7 @@ namespace MyDGV_MVVM
                 PersonVM user = (PersonVM)dgShow.SelectedItem;
                 Entities.Person dbPersonEdit = _db.People.SingleOrDefault(u => u.Id == user.Id);
                 Entities.Person newUser = CreateRandPerson();
-                
+
                 if (dbPersonEdit != null)
                 {
                     dbPersonEdit.Name = newUser.Name;
@@ -122,13 +123,13 @@ namespace MyDGV_MVVM
                     dbPersonEdit.Birthdate = newUser.Birthdate;
 
                     _db.SaveChanges();
-                    
+
                     user.Id = dbPersonEdit.Id;
                     user.Name = dbPersonEdit.Name;
                     user.Surname = dbPersonEdit.Surname;
                     user.Email = dbPersonEdit.Email;
                     user.ImageUrl = dbPersonEdit.Photo;
-                    user.Gender = dbPersonEdit.Gender;
+                    user.Gender = dbPersonEdit.Gender == "Female" ? true : false;
                     user.Birthdate = dbPersonEdit.Birthdate;
                 }
             }

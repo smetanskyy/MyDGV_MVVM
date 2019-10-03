@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MyDGV_MVVM.Helpers
 {
-    class PersonVM : INotifyPropertyChanged
+    public class PersonVM : INotifyPropertyChanged
     {
         public int Id { get; set; }
 
@@ -81,8 +81,8 @@ namespace MyDGV_MVVM.Helpers
             }
         }
 
-        private string _gender;
-        public string Gender
+        private bool _gender;
+        public bool Gender
         {
             get { return _gender; }
             set
