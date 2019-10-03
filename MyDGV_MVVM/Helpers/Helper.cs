@@ -29,6 +29,19 @@ namespace MyDGV_MVVM.Helpers
             return randBabies;
         }
 
+        public static Entities.Person CreateRandPerson()
+        {
+            Random random = new Random();
+            var generator = new Faker<Entities.Person>("uk")
+                .RuleFor(p => p.Gender, f => f.PickRandom<Gender>().ToString())
+                .RuleFor(p => p.Name, (f, p) => f.Name.FirstName(ReturnGenderType(p.Gender)))
+                .RuleFor(p => p.Surname, (f, p) => f.Name.LastName(ReturnGenderType(p.Gender)))
+                .RuleFor(p => p.Birthdate, f => f.Date.PastOffset(60, DateTime.Now.AddYears(-18)).Date)
+                .RuleFor(p => p.Email, (f, p) => f.Internet.Email(p.Name, p.Surname))
+                .RuleFor(p => p.Photo, (f, p) => ReturnUrlPhoto(random, p.Gender));
+            return generator.Generate();
+        }
+
         private static Bogus.DataSets.Name.Gender ReturnGenderType(string genderString)
         {
             if (genderString == "Male")
