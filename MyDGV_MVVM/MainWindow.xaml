@@ -6,6 +6,14 @@
         xmlns:local="clr-namespace:MyDGV_MVVM"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
+    <Window.Resources>
+        <Style x:Key="LightSeaGreenAndWhite">
+            <Setter Property="Control.FontFamily" Value="Verdana" />
+            <Setter Property="Control.Background" Value="LightSeaGreen" />
+            <Setter Property="Control.Foreground" Value="White" />
+            <Setter Property="Control.Margin" Value="10" />
+        </Style>
+    </Window.Resources>
 
     <Grid Margin="0,0,0,0">
         <Label Content="Enter amount of users for adding to database" HorizontalAlignment="Left" Margin="360,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.414,-3.746"/>
@@ -14,9 +22,9 @@
 
         <DockPanel Margin="10,45,10,10">
             <StackPanel DockPanel.Dock="Right" Margin="10,0,0,0">
-                <Button Name="btnAdd" Margin="10,20,10,5" Width="110" Click="BtnAdd_Click">ADD USER</Button>
-                <Button Name="btnChange" Margin="10, 5, 10, 5" Width="110" Click="BtnChange_Click">CHANGE USER</Button>
-                <Button Name="btnRemove" Margin="10, 5, 10, 5" Width="110" Click="BtnRemove_Click">REMOVE USER</Button>
+                <Button Name="btnAdd" Margin="10,20,10,5" Width="110" Click="BtnAdd_Click" Style="{StaticResource LightSeaGreenAndWhite}">ADD USER</Button>
+                <Button Name="btnChange" Margin="10, 5, 10, 5" Width="110" Click="BtnChange_Click" Style="{StaticResource LightSeaGreenAndWhite}">CHANGE USER</Button>
+                <Button Name="btnRemove" Margin="10, 5, 10, 5" Width="110" Click="BtnRemove_Click" Style="{StaticResource LightSeaGreenAndWhite}">REMOVE USER</Button>
             </StackPanel>
             <DataGrid Name="dgShow" AutoGenerateColumns="False">
                 <DataGrid.Columns>
