@@ -30,12 +30,12 @@
                             <Image DockPanel.Dock="Left" Source="{Binding ImageUrl}" Height="64" Margin="20,10,20,10"/>
                             <StackPanel x:Name="stackBirthdate" DockPanel.Dock="Right" Margin="5,5,100,5">
                                 <Label Content="Birthdate:" Margin="5"></Label>
-                                <DatePicker SelectedDate="{Binding Birthdate}" BorderThickness="0" Width="120"/>
+                                <DatePicker SelectedDate="{Binding Birthdate}" BorderThickness="0" Width="120" SelectedDateChanged="DatePicker_SelectedDateChanged" />
                             </StackPanel>
                             <StackPanel x:Name="stackGender" Margin="20,5,20,5">
                                 <Label Content="Gender:" Margin="5"/>
-                                <RadioButton Content="male" IsChecked="True"/>
-                                <RadioButton Content="female" IsChecked="{Binding Gender}"/>
+                                <RadioButton x:Name="radiobtnMale" Content="male" IsChecked="{Binding IsMale}" Checked="RadioButton_Checked"/>
+                                <RadioButton x:Name="radiobtnFemale" Content="female" IsChecked="{Binding IsFemale}" Checked="RadioButton_Checked"/>
                             </StackPanel>
                         </DockPanel>
                     </DataTemplate>

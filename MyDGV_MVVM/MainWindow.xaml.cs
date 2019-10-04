@@ -43,14 +43,15 @@ namespace MyDGV_MVVM
                 Surname = p.Surname,
                 Email = p.Email,
                 ImageUrl = p.Photo,
-                Gender = p.Gender == "Female" ? true : false,
+                IsMale = p.Gender == "Male" ? true : false,
+                IsFemale = p.Gender == "Female" ? true : false,
                 Birthdate = p.Birthdate
             });
 
             _people = new ObservableCollection<PersonVM>(model);
             dgShow.ItemsSource = _people;
         }
-        
+
         private void BtnEnterAmount_Click(object sender, RoutedEventArgs e)
         {
             if (tbAmountUsers.Text.Length == 0)
@@ -100,7 +101,8 @@ namespace MyDGV_MVVM
                 Surname = person.Surname,
                 Email = person.Email,
                 ImageUrl = person.Photo,
-                Gender = person.Gender == "Female" ? true : false,
+                IsMale = person.Gender == "Male" ? true : false,
+                IsFemale = person.Gender == "Female" ? true : false,
                 Birthdate = person.Birthdate
             });
         }
@@ -109,7 +111,16 @@ namespace MyDGV_MVVM
         {
             if (dgShow.SelectedItem != null)
             {
-                PersonVM user = (PersonVM)dgShow.SelectedItem;
+                PersonVM user = null;
+                try
+                {
+                    user = (PersonVM)dgShow.SelectedItem;
+                }
+                catch (Exception)
+                {
+                    return;
+                }
+
                 Entities.Person dbPersonEdit = _db.People.SingleOrDefault(u => u.Id == user.Id);
                 Entities.Person newUser = CreateRandPerson();
 
@@ -129,7 +140,8 @@ namespace MyDGV_MVVM
                     user.Surname = dbPersonEdit.Surname;
                     user.Email = dbPersonEdit.Email;
                     user.ImageUrl = dbPersonEdit.Photo;
-                    user.Gender = dbPersonEdit.Gender == "Female" ? true : false;
+                    user.IsMale = dbPersonEdit.Gender == "Male" ? true : false;
+                    user.IsFemale = !user.IsMale;
                     user.Birthdate = dbPersonEdit.Birthdate;
                 }
             }
@@ -139,7 +151,16 @@ namespace MyDGV_MVVM
         {
             if (dgShow.SelectedItem != null)
             {
-                PersonVM user = (PersonVM)dgShow.SelectedItem;
+                PersonVM user = null;
+                try
+                {
+                    user = (PersonVM)dgShow.SelectedItem;
+                }
+                catch (Exception)
+                {
+                    return;
+                }
+
                 Entities.Person dbUserRemove = _db.People.SingleOrDefault(u => u.Id == user.Id);
 
                 if (dbUserRemove != null)
@@ -150,6 +171,58 @@ namespace MyDGV_MVVM
                     _people.Remove(user);
                 }
             }
+        }
+
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            if(dgShow.SelectedItem != null)
+            {
+                PersonVM user = null;
+                try
+                {
+                    user = (PersonVM)dgShow.SelectedItem;
+                }
+                catch (Exception)
+                {
+                    return;
+                }
+                RadioButton button = (RadioButton)sender;
+                if(button.IsChecked == true)
+                {
+                    Entities.Person personForChange = _db.People.SingleOrDefault(p => p.Id == user.Id);
+                    if ((string)button.Content == "male")
+                    {
+                        personForChange.Gender = "Male";
+                        user.IsMale = true;
+                        user.IsFemale = false;
+                    }
+                    else
+                    {
+                        personForChange.Gender = "Female";
+                        user.IsMale = false;
+                        user.IsFemale = true;
+                    }
+                    _db.SaveChanges();
+                }
+            }
+        }
+
+        private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            PersonVM user = null;
+            try
+            {
+                user = (PersonVM)dgShow.SelectedItem;
+            }
+            catch (Exception)
+            {
+                return;
+            }
+
+            DatePicker datePicker = (DatePicker)sender;
+            Entities.Person personForChange = _db.People.SingleOrDefault(p => p.Id == user.Id);
+            personForChange.Birthdate = datePicker.SelectedDate.Value.Date;
+            _db.SaveChanges();
         }
     }
 }

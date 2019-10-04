@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace MyDGV_MVVM.Helpers
 {
@@ -81,16 +82,30 @@ namespace MyDGV_MVVM.Helpers
             }
         }
 
-        private bool _gender;
-        public bool Gender
+        private bool _isMale;
+        public bool IsMale
         {
-            get { return _gender; }
+            get { return _isMale; }
             set
             {
-                if (_gender != value)
+                if (_isMale != value)
                 {
-                    _gender = value;
-                    this.NotifyPropertyChanged("Gender");
+                    _isMale = value;
+                    this.NotifyPropertyChanged("IsMale");
+                }
+            }
+        }
+
+        private bool _isFemale;
+        public bool IsFemale
+        {
+            get { return _isFemale; }
+            set
+            {
+                if (_isFemale != value)
+                {
+                    _isFemale = value;
+                    this.NotifyPropertyChanged("IsFemale");
                 }
             }
         }
