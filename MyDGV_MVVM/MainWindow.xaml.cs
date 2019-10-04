@@ -215,5 +215,38 @@ namespace MyDGV_MVVM
             personForChange.Birthdate = datePicker.SelectedDate.Value.Date;
             _db.SaveChanges();
         }
+
+        private void BtnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            IQueryable<Person> searchList = _db.People.AsQueryable();
+            if (txtboxName.Text != null && txtboxName.Text.Length > 0 )
+            {
+                searchList = _db.People.Where(p => p.Name == txtboxName.Text);
+            }
+            if (txtboxSurname.Text != null && txtboxSurname.Text.Length > 0)
+            {
+                searchList = _db.People.Where(p => p.Surname == txtboxSurname.Text);
+            }
+            var model = searchList.Select(p => new PersonVM
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Surname = p.Surname,
+                Email = p.Email,
+                ImageUrl = p.Photo,
+                IsMale = p.Gender == "Male" ? true : false,
+                IsFemale = p.Gender == "Female" ? true : false,
+                Birthdate = p.Birthdate
+            });
+
+            dgShow.ItemsSource = null;
+            _people = new ObservableCollection<PersonVM>(model);
+            dgShow.ItemsSource = _people;
+        }
+
+        private void BtnShowAll_Click(object sender, RoutedEventArgs e)
+        {
+            Window_Loaded(sender, e);
+        }
     }
 }

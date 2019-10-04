@@ -21,10 +21,17 @@
         <Button x:Name="btnEnterAmount" Content="Enter" HorizontalAlignment="Left" Margin="685,10,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="BtnEnterAmount_Click"/>
 
         <DockPanel Margin="10,45,10,10">
-            <StackPanel DockPanel.Dock="Right" Margin="10,0,0,0">
+            <StackPanel DockPanel.Dock="Right" Margin="10,0,0,0" Background="GhostWhite">
                 <Button Name="btnAdd" Margin="10,20,10,5" Width="110" Click="BtnAdd_Click" Style="{StaticResource LightSeaGreenAndWhite}">ADD USER</Button>
                 <Button Name="btnChange" Margin="10, 5, 10, 5" Width="110" Click="BtnChange_Click" Style="{StaticResource LightSeaGreenAndWhite}">CHANGE USER</Button>
                 <Button Name="btnRemove" Margin="10, 5, 10, 5" Width="110" Click="BtnRemove_Click" Style="{StaticResource LightSeaGreenAndWhite}">REMOVE USER</Button>
+                <Label Name="lblSearch" Margin="10,40,10,0" HorizontalAlignment="Center">SEARCH by:</Label>
+                <Label Name="lblByName" Margin="10,0,10,0" >name:</Label>
+                <TextBox Name="txtboxName" Margin="10,0,10,0" Background="White"></TextBox>
+                <Label Name="lblBySurname" Margin="10,0,10,0" >surname:</Label>
+                <TextBox Name="txtboxSurname" Margin="10,0,10,0" Background="White"></TextBox>
+                <Button Name="btnSearch" Margin="10, 10, 10, 5" Width="110" Style="{StaticResource LightSeaGreenAndWhite}" Click="BtnSearch_Click">ENTER</Button>
+                <Button Name="btnShowAll" Margin="10, 40, 10, 5" Width="110" Style="{StaticResource LightSeaGreenAndWhite}" Click="BtnShowAll_Click">SHOW ALL</Button>
             </StackPanel>
             <DataGrid Name="dgShow" AutoGenerateColumns="False">
                 <DataGrid.Columns>
